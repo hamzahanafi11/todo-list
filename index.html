@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo list by Hamza Hanafi</title>
+    <link rel="stylesheet" type="text/css" href="css/starter.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+</head>
+<body>
+	<div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main">
+                    <input type="text" placeholder="write a todo here">
+                    <input type="button" value="add">
+                </div>
+                <div class="todos">
+                    <ul>
+                   <!-- <li>
+                            <div class="fa fa-check"></div>
+                            <p> content 2 go here</p>
+                            <button><span class="fa fa-times" ></span></button>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <script type="text/javascript">
+
+        $(function(){
+            Object.keys(localStorage).forEach(function(key) {
+                var content = localStorage[key];
+                var marked  = key.split('_')[1] == "done" ? true : false;
+                render(content,marked,key);
+            });
+        });
+
+        $('input[type="button"]').on('click',function(){
+            var content = $('input[type="text"]').val();
+            if(content === ""){
+                return;
+            }
+            var todo = {
+                "content" : content,
+                "index"   : "todo-"+localStorage.length+"_not-done"
+            };
+            localStorage.setItem(todo.index,todo.content);
+            $('input[type="text"]').val("");
+            render(content,false,todo.index);
+        });
+
+        function render(content,marked,key){
+            var $li     = $('<li></li>');
+            var $div    = marked == true ? $('<div class="fa fa-check"></div>'):$('<div style="display:none" class="fa fa-check"></div>') ;
+            var $button = $('<button onclick="deleteTodo(\''+key+'\',this)" ><span class="fa fa-times"></span></button>');
+            var $p      = $('<p data-key="'+key+'">'+ content +'</p>');
+
+            $li.append($div);
+            $li.append($p);
+            $li.append($button);
+            $li.hide().appendTo('ul').fadeIn();
+        }
+
+        $(document.body).on('click','p',function(){
+            var $checked = $(this).siblings('div.fa-check');
+            var key      = $(this).attr('data-key');
+            if($checked.is(':visible')){
+                var content = localStorage[key];
+                var newKey  = key.split('_')[0]+"_not-done";
+                $(this).attr('data-key',newKey);
+                localStorage.removeItem(key);
+                localStorage.setItem(newKey,content);
+                $checked.fadeOut();
+            }
+            else{
+                var content = localStorage[key];
+                var newKey  = key.split('_')[0]+"_done";
+                $(this).attr('data-key',newKey);
+                localStorage.removeItem(key);
+                localStorage.setItem(newKey,content);
+                $checked.fadeIn();
+            }            
+        });
+
+        function  deleteTodo(key,el){
+            localStorage.removeItem(key);
+            $(el).parent().fadeOut();
+        }
+
+    </script>
+</body>
+</html>
