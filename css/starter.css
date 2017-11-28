@@ -57,7 +57,15 @@ div .fa-check{
     left: 15px;
     margin-left: 10px;
 }
-
-.done{
-    display: block;
+.about{
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
+}
+.about p a{
+    text-decoration: none;
+    cursor: pointer;
+}
+.about p a:hover{
+    color: #073358;
 }
