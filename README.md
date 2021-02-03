@@ -1,6 +1,6 @@
 # todo-list
 
-Have fun with this basic todo list app, 
+Have fun with this basic todo list application, 
 
 feel free to create a pull request to add new features
 
