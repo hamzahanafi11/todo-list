@@ -1,4 +1,4 @@
-# todo-list
+# todo-list by Hamza Hanafi
 
 Have fun with this basic todo list application, 
 
