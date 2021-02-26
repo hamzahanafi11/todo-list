@@ -1,6 +1,6 @@
 # todo-list by Hamza Hanafi
 
-Have fun with this basic todo list application, 
+Have fun with this basic todo list app, 
 
 feel free to create a pull request to add new features
 
