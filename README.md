@@ -1,4 +1,4 @@
-# todo-list by Hamza Hanafi
+# todo app by Hamza Hanafi
 
 Have fun with this basic todo list app, 
 
